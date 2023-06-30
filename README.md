@@ -12,12 +12,27 @@ The temporal coordinates are shown at the top left corner of the frame. <em>Fram
 
 <h3 align="left">  BAIR </h3>
 
-<video width="712" height="616" autoplay>
-  <source src="./STDiff_BAIR_0.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+<h3 align="center"> <img src="./STDiff_BAIR_0.gif" alt="STDiff_BAIR_0"> </h3>
+
+<h3 align="center"> <img src="./STDiff_BAIR_15.gif" alt="STDiff_BAIR_15"> </h3>
 
 
-<h3 align="center"> <img src="./kth_rc_vfi_10to10_1xfps.gif" alt="KTH-RC-VFI-1xfps"> </h3>
+<h3 align="left">  SMMNIST </h3>
 
-<em><b>2X fps</b></em> (Ground-truth is not available) 
+<h3 align="center"> <img src="./STDiff_SMMNIST_7.gif" alt="STDiff_SMMNIST_7"> </h3>
+
+<h3 align="center"> <img src="./STDiff_SMMNIST_10.gif" alt="STDiff_SMMNIST_10"> </h3>
+
+
+<h3 align="left">  KITTI </h3>
+
+<h3 align="center"> <img src="./STDiff_KITTI_0.gif" alt="STDiff_KITTI_0"> </h3>
+
+<h3 align="center"> <img src="./STDiff_KITTI_22.gif" alt="STDiff_KITTI_22"> </h3>
+
+
+<h3 align="left">  Cityscapes </h3>
+
+<h3 align="center"> <img src="./STDiff_City_110.gif" alt="STDiff_City_110"> </h3>
+
+<h3 align="center"> <img src="./STDiff_City_120.gif" alt="STDiff_City_120"> </h3>
