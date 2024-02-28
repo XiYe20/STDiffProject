@@ -1,0 +1,40 @@
+Dataset:
+    name: 'KITTI'
+    dir: '/home/travail/xiyex/KITTI_Processed'
+    phase: 'deploy'
+    dev_set_size: null
+    batch_size: 64
+    num_workers: 16
+    num_channels: 3
+    image_size: 128
+    num_observed_frames: 4
+    num_predict_frames: 5
+    test_num_observed_frames: 4
+    test_num_predict_frames: 5
+    rand_Tp: null
+    rand_predict: False
+    half_fps: False
+
+STDiff:
+    Diffusion:
+        unet_config:
+            sample_size: 128
+    DiffNet:
+        MotionEncoder:
+            image_size: 128
+
+TestCfg:
+    ckpt_path: "/home/travail/xiyex/STDiff_ckpts/kitti_sde_128"
+    test_results_path: "/home/travail/xiyex/STDiff_ckpts/kitti_sde_128/test_ddpm100"
+    scheduler: 
+        name: 'DDPM' #'DPMMS' or 'DDPM'
+        sample_steps: 100
+
+    fps: 1
+    metrics: ['PSNR', 'SSIM', 'LPIPS', 'InterLPIPS']
+    random_predict:
+        first_pred_sample_num: 10
+        first_pred_parralle_bs: 4
+        sample_num: 10
+        fix_init_noise: False
+        

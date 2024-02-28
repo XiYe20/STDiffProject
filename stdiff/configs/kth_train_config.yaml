@@ -1,0 +1,96 @@
+Env:
+    output_dir: '/home/travail/xiyex/STDiff_ckpts/kth_sde_64'
+    logger: 'tensorboard'
+    resume_ckpt: null
+    stdiff_init_ckpt: null
+    
+
+Dataset:
+    name: 'KTH'
+    dir: '/home/travail/xiyex/KTH'
+    phase: 'deploy'
+    dev_set_size: null
+    batch_size: 4
+    num_workers: 16
+    num_channels: 3
+    image_size: 64
+    num_observed_frames: 10
+    num_predict_frames: 10
+    test_num_observed_frames: 10
+    test_num_predict_frames: 10
+    rand_Tp: 6
+    rand_predict: True
+    half_fps: False
+
+STDiff:
+    Diffusion:
+        prediction_type: 'epsilon' #'epsilon' or 'sample'
+        ddpm_num_steps: 1000
+        ddpm_num_inference_steps: 100
+        ddpm_beta_schedule: 'linear'
+
+        unet_config:
+            sample_size: 64
+            in_channels: 6
+            out_channels: 3
+            m_channels: 256
+            layers_per_block: 2
+            #config for resolution 128
+            #block_out_channels: [256, 256, 512, 768, 1024]
+            #down_block_types: ["DownBlock2D","DownBlock2D","DownBlock2D", "AttnDownBlock2D", "AttnDownBlock2D"]
+            #up_block_types: ["AttnUpBlock2D", "AttnUpBlock2D","UpBlock2D", "UpBlock2D", "UpBlock2D"]
+            #attention_head_dim: [null, null, null, 192, 256]
+            
+            #config for resolution 64
+            block_out_channels: [128, 256, 256, 512, 512]
+            down_block_types: ["DownBlock2D","AttnDownBlock2D","AttnDownBlock2D", "AttnDownBlock2D", "AttnDownBlock2D"]
+            up_block_types: ["AttnUpBlock2D", "AttnUpBlock2D","AttnUpBlock2D", "AttnUpBlock2D", "UpBlock2D"]
+            attention_head_dim: [null, 128, 128, 128, 128]
+
+    DiffNet:
+        autoregressive: True
+        super_res_training: False
+        MotionEncoder:
+            learn_diff_image: True
+            image_size: 64
+            in_channels: 3
+            model_channels: 64
+            n_downs: 2
+        DiffUnet:
+            n_layers: 2
+            nonlinear: 'tanh'
+        Int:
+            sde: True
+            method: 'euler_heun'
+            sde_options:
+                noise_type: 'diagonal'
+                sde_type: "stratonovich" #"Stratonovich"
+                dt: 0.1
+                rtol: 1e-3
+                atol: 1e-3
+                adaptive: False
+            ode_options:
+                step_size: 0.1
+                norm: null
+
+Training:
+    use_ema: True
+    ema_inv_gamma: 1.0
+    ema_power: 0.75
+    ema_max_decay: 0.9999
+
+    learning_rate: 1e-4
+    lr_scheduler: 'cosine_with_restarts'
+    lr_warmup_steps: 500
+    num_cycles: 2
+    adam_betas: [0.95, 0.999]
+    adam_weight_decay: 1e-6
+    adam_epsilon: 1e-8
+
+    epochs: 800
+    save_images_epochs: 4
+    save_model_epochs: 4
+    checkpointing_steps: 1000 #number of steps to save a resuming checkpoint
+
+    gradient_accumulation_steps: 1 #4 for 128 resolution, 4 GPU training
+    mixed_precision: "no" #["no", "fp16", "bf16"],

@@ -1,0 +1,40 @@
+Dataset:
+    name: 'KTH'
+    dir: '/home/travail/xiyex/KTH'
+    phase: 'deploy'
+    dev_set_size: null
+    batch_size: 64
+    num_workers: 16
+    num_channels: 3
+    image_size: 64
+    num_observed_frames: 10
+    num_predict_frames: 10
+    test_num_observed_frames: 10
+    test_num_predict_frames: 20
+    rand_Tp: null
+    rand_predict: False
+    half_fps: False
+
+STDiff:
+    Diffusion:
+        unet_config:
+            sample_size: 64
+    DiffNet:
+        MotionEncoder:
+            image_size: 64
+
+TestCfg:
+    ckpt_path: "/home/travail/xiyex/STDiff_ckpts/kth_sde_64"
+    test_results_path: "/home/travail/xiyex/STDiff_ckpts/kth_sde_64/test_ddpm100"
+    scheduler: 
+        name: 'DDPM' #'DPMMS' or 'DDPM'
+        sample_steps: 100
+
+    fps: 1
+    metrics: ['PSNR', 'SSIM', 'LPIPS', 'InterLPIPS']
+    random_predict:
+        first_pred_sample_num: 10
+        first_pred_parralle_bs: 4
+        sample_num: 10
+        fix_init_noise: False
+        
