@@ -106,11 +106,14 @@ The STDiff project uses accelerate for training. The training configuration file
 
 ## Citation
 ```
-@article{ye2023stdiff,
-  title={STDiff: Spatio-temporal Diffusion for Continuous Stochastic Video Prediction},
+@inproceedings{ye2024stdiff,
+  title={STDiff: Spatio-Temporal Diffusion for Continuous Stochastic Video Prediction},
   author={Ye, Xi and Bilodeau, Guillaume-Alexandre},
-  journal={arXiv preprint arXiv:2312.06486},
-  year={2023}
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={38},
+  number={7},
+  pages={6666--6674},
+  year={2024}
 }
 ```
 
